@@ -22,7 +22,7 @@ function MyStack() {
                 name="Add" 
                 component={Add} 
                 options={{ 
-                    title: 'Agregar Tarea',
+                    title: 'Agregar Producto',
                     headerStyle: { backgroundColor: '#1E88E5' },
                     headerTintColor: '#fff',
                     headerTitleStyle: { fontWeight: 'bold' },
