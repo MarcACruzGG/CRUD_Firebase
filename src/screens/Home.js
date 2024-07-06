@@ -3,10 +3,10 @@ import * as RN from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { database } from "../../config/fb";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import Product from "../components/Product";
+import Task from "../components/Task"; // Asegúrate de actualizar el componente Product a Task
 
 export default function Home() {
-  const [products, setProducts] = React.useState([]);
+  const [tasks, setTasks] = React.useState([]);
   const navigation = useNavigation();
 
   React.useLayoutEffect(() => {
@@ -18,17 +18,16 @@ export default function Home() {
   }, [navigation]);
 
   React.useEffect(() => {
-    const collectionRef = collection(database, "products");
+    const collectionRef = collection(database, "tasks");
     const q = query(collectionRef, orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       console.log("querySnapshot unsusbscribe");
-      setProducts(
+      setTasks(
         querySnapshot.docs.map((doc) => ({
           id: doc.id,
           emoji: doc.data().emoji,
           name: doc.data().name,
-          price: doc.data().price,
-          isSold: doc.data().isSold,
+          completed: doc.data().completed,
           createdAt: doc.data().createdAt,
         }))
       );
@@ -39,9 +38,9 @@ export default function Home() {
   return (
     <RN.View style={styles.container}>
       <RN.ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-        <RN.Text style={styles.title}>Productos</RN.Text>
-        {products.map((product) => (
-          <Product key={product.id} {...product} />
+        <RN.Text style={styles.title}>Tareas</RN.Text>
+        {tasks.map((task) => (
+          <Task key={task.id} {...task} />
         ))}
       </RN.ScrollView>
     </RN.View>

@@ -1,42 +1,34 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import Home from './screens/Home';
-import Add from './screens/Add';
+import * as React from "react";
+import * as RN from "react-native";
 
-const Stack = createNativeStackNavigator();
-
-function MyStack() {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen 
-                name="Home" 
-                component={Home} 
-                options={{
-                    title: 'Inicio',
-                    headerStyle: { backgroundColor: '#2E7D32' },
-                    headerTintColor: '#fff',
-                    headerTitleStyle: { fontWeight: 'bold' },
-                }}
-            />
-            <Stack.Screen 
-                name="Add" 
-                component={Add} 
-                options={{ 
-                    title: 'Agregar Producto',
-                    headerStyle: { backgroundColor: '#1E88E5' },
-                    headerTintColor: '#fff',
-                    headerTitleStyle: { fontWeight: 'bold' },
-                    presentation: 'modal'
-                }} 
-            />
-        </Stack.Navigator>
-    );
+export default function Task({ emoji, name, completed }) {
+  return (
+    <RN.View style={styles.task}>
+      <RN.Text style={styles.emoji}>{emoji}</RN.Text>
+      <RN.Text style={styles.name}>{name}</RN.Text>
+      <RN.Text style={styles.status}>{completed ? "Realizada" : "Pendiente"}</RN.Text>
+    </RN.View>
+  );
 }
 
-export default function Navigation() {
-    return (
-        <NavigationContainer>
-            <MyStack />
-        </NavigationContainer>
-    );
-}
+const styles = RN.StyleSheet.create({
+  task: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderColor: "#ddd",
+  },
+  emoji: {
+    fontSize: 24,
+    marginRight: 16,
+  },
+  name: {
+    fontSize: 18,
+    flex: 1,
+  },
+  status: {
+    fontSize: 18,
+    color: completed ? "green" : "red",
+  },
+});
