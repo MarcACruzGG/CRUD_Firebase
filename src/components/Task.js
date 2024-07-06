@@ -23,7 +23,7 @@ export default function Task({
         });
     }
 
-    return(
+    return (
         <RN.View>
             <RN.View style={styles.taskContainer}>
                 <RN.View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -41,7 +41,7 @@ export default function Task({
                     <RN.TouchableOpacity 
                     onPress={onEdit}
                     style={styles.button}>
-                    <RN.Text style={styles.buttonText}>Marcar como Realizada</RN.Text>
+                    <RN.Text style={styles.buttonText}>Realizar</RN.Text>
                 </RN.TouchableOpacity>
                 )}
                 
@@ -70,7 +70,7 @@ const styles = RN.StyleSheet.create({
         marginVertical: 6,
         borderRadius: 8,
         alignItems: 'center'
-   },
+    },
     buttonText: {
         fontSize: 24,
         fontWeight: 'bold',

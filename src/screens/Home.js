@@ -3,7 +3,7 @@ import * as RN from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { database } from "../../config/fb";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import Task from "../components/Task"; // Asegúrate de actualizar esta línea
+import Task from "../components/Task";
 
 export default function Home() {
   const [tasks, setTasks] = React.useState([]);

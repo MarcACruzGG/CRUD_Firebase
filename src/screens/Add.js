@@ -8,31 +8,30 @@ import EmojiPicker from "rn-emoji-keyboard";
 export default function Add() {
   const navigation = useNavigation();
   const [isOpen, setIsOpen] = React.useState(false);
-  const [newItem, setNewItem] = React.useState({
-    emoji: "📷",
+  const [newTask, setNewTask] = React.useState({
+    emoji: "📋",
     name: "",
-    price: 0,
-    isSold: false,
+    completed: false,
     createdAt: new Date(),
   });
 
   const handlePick = (emojiObject) => {
-    setNewItem({
-      ...newItem,
+    setNewTask({
+      ...newTask,
       emoji: emojiObject.emoji,
     });
   };
 
   const onSend = async () => {
-    const docRef = await addDoc(collection(database, "products"), newItem);
+    const docRef = await addDoc(collection(database, "tasks"), newTask);
     navigation.goBack();
   };
 
   return (
     <RN.View style={styles.container}>
-      <RN.Text style={styles.title}>Vender un Nuevo Producto</RN.Text>
+      <RN.Text style={styles.title}>Crear Nueva Tarea</RN.Text>
       <RN.Text onPress={() => setIsOpen(true)} style={styles.emoji}>
-        {newItem.emoji}
+        {newTask.emoji}
       </RN.Text>
       <EmojiPicker
         onEmojiSelected={handlePick}
@@ -40,19 +39,12 @@ export default function Add() {
         onClose={() => setIsOpen(false)}
       />
       <RN.TextInput
-        onChangeText={(text) => setNewItem({ ...newItem, name: text })}
+        onChangeText={(text) => setNewTask({ ...newTask, name: text })}
         style={styles.inputContainer}
-        placeholder="Nombre del Producto"
+        placeholder="Tarea"
         placeholderTextColor="#757575"
       />
-      <RN.TextInput
-        onChangeText={(text) => setNewItem({ ...newItem, price: text })}
-        style={styles.inputContainer}
-        placeholder="$ Precio"
-        placeholderTextColor="#757575"
-        keyboardType="numeric"
-      />
-      <RN.Button title="Publicar" onPress={onSend} color="#2E7D32" />
+      <RN.Button title="Agregar" onPress={onSend} color="#2E7D32" />
     </RN.View>
   );
 }
