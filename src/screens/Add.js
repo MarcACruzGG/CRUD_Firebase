@@ -9,10 +9,8 @@ export default function Add() {
   const navigation = useNavigation();
   const [isOpen, setIsOpen] = React.useState(false);
   const [newItem, setNewItem] = React.useState({
-    emoji: "📷",
+    emoji: "📝",
     name: "",
-    price: 0,
-    isSold: false,
     createdAt: new Date(),
   });
 
@@ -24,13 +22,13 @@ export default function Add() {
   };
 
   const onSend = async () => {
-    const docRef = await addDoc(collection(database, "products"), newItem);
+    const docRef = await addDoc(collection(database, "tasks"), newItem);
     navigation.goBack();
   };
 
   return (
     <RN.View style={styles.container}>
-      <RN.Text style={styles.title}>Vender un Nuevo Producto</RN.Text>
+      <RN.Text style={styles.title}>Agregar Nueva Tarea</RN.Text>
       <RN.Text onPress={() => setIsOpen(true)} style={styles.emoji}>
         {newItem.emoji}
       </RN.Text>
@@ -42,15 +40,8 @@ export default function Add() {
       <RN.TextInput
         onChangeText={(text) => setNewItem({ ...newItem, name: text })}
         style={styles.inputContainer}
-        placeholder="Nombre del Producto"
+        placeholder="Nombre de la Tarea"
         placeholderTextColor="#757575"
-      />
-      <RN.TextInput
-        onChangeText={(text) => setNewItem({ ...newItem, price: text })}
-        style={styles.inputContainer}
-        placeholder="$ Precio"
-        placeholderTextColor="#757575"
-        keyboardType="numeric"
       />
       <RN.Button title="Publicar" onPress={onSend} color="#2E7D32" />
     </RN.View>
