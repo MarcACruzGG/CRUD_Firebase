@@ -1,17 +1,36 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Home from './screens/Home'
+import Home from './screens/Home';
 import Add from './screens/Add';
 
 const Stack = createNativeStackNavigator();
 
 function MyStack() {
-    return(
+    return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={Home}/>
-            <Stack.Screen name="Add" component={Add} options={{presentation: 'modal'}}/>
+            <Stack.Screen 
+                name="Home" 
+                component={Home} 
+                options={{
+                    title: 'Inicio',
+                    headerStyle: { backgroundColor: '#2E7D32' },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: { fontWeight: 'bold' },
+                }}
+            />
+            <Stack.Screen 
+                name="Add" 
+                component={Add} 
+                options={{ 
+                    title: 'Agregar Producto',
+                    headerStyle: { backgroundColor: '#1E88E5' },
+                    headerTintColor: '#fff',
+                    headerTitleStyle: { fontWeight: 'bold' },
+                    presentation: 'modal'
+                }} 
+            />
         </Stack.Navigator>
-    )
+    );
 }
 
 export default function Navigation() {
@@ -19,5 +38,5 @@ export default function Navigation() {
         <NavigationContainer>
             <MyStack />
         </NavigationContainer>
-    )
+    );
 }

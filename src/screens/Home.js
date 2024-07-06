@@ -12,7 +12,7 @@ export default function Home() {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <RN.Button title="Add" onPress={() => navigation.navigate("Add")} />
+        <RN.Button title="Agregar" onPress={() => navigation.navigate("Add")} />
       ),
     });
   }, [navigation]);
@@ -21,7 +21,6 @@ export default function Home() {
     const collectionRef = collection(database, "products");
     const q = query(collectionRef, orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      // onSnapshot is a listener that listens to changes in the database in realtime
       console.log("querySnapshot unsusbscribe");
       setProducts(
         querySnapshot.docs.map((doc) => ({
@@ -34,14 +33,13 @@ export default function Home() {
         }))
       );
     });
-    return unsubscribe; // unsubscribe from the listener when the component is unmounting
-    // because it avoids memory leaks
+    return unsubscribe;
   }, []);
 
   return (
     <RN.View style={styles.container}>
       <RN.ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-        <RN.Text style={styles.title}>Products</RN.Text>
+        <RN.Text style={styles.title}>Productos</RN.Text>
         {products.map((product) => (
           <Product key={product.id} {...product} />
         ))}
@@ -53,11 +51,12 @@ export default function Home() {
 const styles = RN.StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F3F9",
+    backgroundColor: "#E8F5E9",
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
     margin: 16,
+    color: "#2E7D32",
   },
 });

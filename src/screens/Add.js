@@ -22,12 +22,6 @@ export default function Add() {
       emoji: emojiObject.emoji,
     });
   };
-  /* example emojiObject = { 
-          "emoji": "❤️",
-          "name": "red heart",
-          "slug": "red_heart",
-        }
-      */
 
   const onSend = async () => {
     const docRef = await addDoc(collection(database, "products"), newItem);
@@ -36,7 +30,7 @@ export default function Add() {
 
   return (
     <RN.View style={styles.container}>
-      <RN.Text style={styles.title}>Sell a New Product</RN.Text>
+      <RN.Text style={styles.title}>Vender un Nuevo Producto</RN.Text>
       <RN.Text onPress={() => setIsOpen(true)} style={styles.emoji}>
         {newItem.emoji}
       </RN.Text>
@@ -48,14 +42,17 @@ export default function Add() {
       <RN.TextInput
         onChangeText={(text) => setNewItem({ ...newItem, name: text })}
         style={styles.inputContainer}
-        placeholder="Product Name"
+        placeholder="Nombre del Producto"
+        placeholderTextColor="#757575"
       />
       <RN.TextInput
         onChangeText={(text) => setNewItem({ ...newItem, price: text })}
         style={styles.inputContainer}
-        placeholder="$ Price"
+        placeholder="$ Precio"
+        placeholderTextColor="#757575"
+        keyboardType="numeric"
       />
-      <RN.Button title="Publish" onPress={onSend} />
+      <RN.Button title="Publicar" onPress={onSend} color="#2E7D32" />
     </RN.View>
   );
 }
@@ -63,25 +60,27 @@ export default function Add() {
 const styles = RN.StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#E3F2FD",
     alignItems: "center",
   },
   title: {
     fontSize: 32,
     fontWeight: "700",
+    color: "#1E88E5",
+    margin: 20,
   },
   inputContainer: {
     width: "90%",
     padding: 13,
     marginVertical: 6,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "#90CAF9",
     borderRadius: 6,
   },
   emoji: {
     fontSize: 100,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "#90CAF9",
     borderRadius: 6,
     padding: 10,
     marginVertical: 6,
